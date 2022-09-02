@@ -43,3 +43,64 @@ class MyApp extends StatelessWidget {
   }
 }
 ```
+
+
+## Flutter App ListView builder
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:english_words/english_words.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: "Flutter App List View",
+      theme: ThemeData(primarySwatch: Colors.red),
+      home: Scaffold(
+          appBar: AppBar(title: const Text("Flutter App ListView")),
+          body: const Center(
+            child: RandomWords(),
+          )),
+    );
+  }
+}
+
+class RandomWords extends StatefulWidget {
+  const RandomWords({Key? key}) : super(key: key);
+
+  @override
+  State<RandomWords> createState() => _RandomWordsState();
+}
+
+class _RandomWordsState extends State<RandomWords> {
+  final _suggestions = <WordPair>[];
+  final _titleFont = const TextStyle(fontSize: 20);
+  @override
+  Widget build(BuildContext context) {
+    // lazyloaded ListView builder in flutter
+    return ListView.builder(itemBuilder: (context, index) {
+      if (index.isOdd) {
+        return const Divider();
+      }
+      final i = index ~/ 2;
+      if (i >= _suggestions.length) {
+        _suggestions.addAll(generateWordPairs().take(5));
+      }
+
+      return ListTile(
+          title: Text(
+        _suggestions[i].asSnakeCase,
+        style: _titleFont,
+      ));
+    });
+  }
+}
+
+```
