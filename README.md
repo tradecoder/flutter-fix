@@ -312,38 +312,53 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: ListView.builder(
-        itemBuilder: (context, index) {
-          if (index.isOdd) {
-            return const Divider();
-          }
-          final i = index ~/ 2;
-          if (i >= _wordCollection.length) {
-            _wordCollection.addAll(generateWordPairs().take(10));
-          }
-          final isItemSaved = _savedItems.contains(_wordCollection[i]);
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: _savedItems.isNotEmpty
+                ? const Text("Press menu icon to see all your saved items.")
+                : const Text(
+                    "You haven't any saved collection. To save an item, just tap it."),
+          ),
+          const Divider(),
+          Expanded(
+            child: ListView.builder(
+              itemBuilder: (context, index) {
+                if (index.isOdd) {
+                  return const Divider();
+                }
+                final i = index ~/ 2;
+                if (i >= _wordCollection.length) {
+                  _wordCollection.addAll(generateWordPairs().take(10));
+                }
+                final isItemSaved = _savedItems.contains(_wordCollection[i]);
 
-          return ListTile(
-            title: Text(
-              _wordCollection[i].asSnakeCase,
-              style: _titleFont,
+                return ListTile(
+                  title: Text(
+                    _wordCollection[i].asSnakeCase,
+                    style: _titleFont,
+                  ),
+                  subtitle: isItemSaved
+                      ? const Text("You like it")
+                      : const Text("Like? Tap to save"),
+                  trailing: Icon(
+                    isItemSaved ? Icons.favorite : Icons.favorite_border,
+                    color: isItemSaved ? Colors.red : null,
+                  ),
+                  onTap: () {
+                    setState(() {
+                      isItemSaved
+                          ? _savedItems.remove(_wordCollection[i])
+                          : _savedItems.add(_wordCollection[i]);
+                    });
+                  },
+                );
+              },
             ),
-            subtitle: isItemSaved
-                ? const Text("You like it")
-                : const Text("Like? Tap to save"),
-            trailing: Icon(
-              isItemSaved ? Icons.favorite : Icons.favorite_border,
-              color: isItemSaved ? Colors.red : null,
-            ),
-            onTap: () {
-              setState(() {
-                isItemSaved
-                    ? _savedItems.remove(_wordCollection[i])
-                    : _savedItems.add(_wordCollection[i]);
-              });
-            },
-          );
-        },
+          )
+        ],
       ),
     );
   }
