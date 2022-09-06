@@ -262,3 +262,123 @@ class _HomePageState extends State<HomePage> {
 }
 
 ```
+
+## View saved items in a new page in Flutter
+
+```
+import 'package:flutter/material.dart';
+import 'package:english_words/english_words.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      title: "View saved items in a new page in Flutter",
+      home: HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final _wordCollection = <WordPair>[];
+  final _savedItems = <WordPair>[];
+  final _titleFont = const TextStyle(
+    fontSize: 20,
+    color: Colors.blue,
+  );
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Home page: view all"),
+        actions: [
+          IconButton(
+            onPressed: _viewSavedItems,
+            icon: const Icon(Icons.list),
+          ),
+        ],
+      ),
+      body: ListView.builder(
+        itemBuilder: (context, index) {
+          if (index.isOdd) {
+            return const Divider();
+          }
+          final i = index ~/ 2;
+          if (i >= _wordCollection.length) {
+            _wordCollection.addAll(generateWordPairs().take(10));
+          }
+          final isItemSaved = _savedItems.contains(_wordCollection[i]);
+
+          return ListTile(
+            title: Text(
+              _wordCollection[i].asSnakeCase,
+              style: _titleFont,
+            ),
+            subtitle: isItemSaved
+                ? const Text("You like it")
+                : const Text("Like? Tap to save"),
+            trailing: Icon(
+              isItemSaved ? Icons.favorite : Icons.favorite_border,
+              color: isItemSaved ? Colors.red : null,
+            ),
+            onTap: () {
+              setState(() {
+                isItemSaved
+                    ? _savedItems.remove(_wordCollection[i])
+                    : _savedItems.add(_wordCollection[i]);
+              });
+            },
+          );
+        },
+      ),
+    );
+  }
+
+  void _viewSavedItems() {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: ((context) {
+          final tiles = _savedItems.map((e) {
+            return ListTile(
+              title: Text(
+                e.asSnakeCase,
+                style: _titleFont,
+              ),
+            );
+          });
+
+          final viewSelectedItems = tiles.isNotEmpty
+              ? ListTile.divideTiles(
+                  context: context,
+                  tiles: tiles,
+                ).toList()
+              : <Widget>[];
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text("Your saved items"),
+            ),
+            body: ListView(
+              children: viewSelectedItems,
+            ),
+          );
+        }),
+      ),
+    );
+  }
+}
+
+```
