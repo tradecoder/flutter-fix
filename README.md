@@ -397,3 +397,122 @@ class _HomePageState extends State<HomePage> {
 }
 
 ```
+
+## Full width button setup in Flutter
+
+```dart
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+const _titleFont = TextStyle(fontSize: 20, color: Colors.blue);
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: "Full width button setup in Flutter",
+      theme: ThemeData(
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.blue,
+          foregroundColor: Colors.white,
+        ),
+      ),
+      home: Scaffold(
+          appBar: AppBar(
+            title: const Text("Sign up"),
+          ),
+          body: Container(
+            color: Colors.white54,
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  padding: null,
+                  child: const Center(
+                    child: Text(
+                      "Please sign up",
+                      style: _titleFont,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 30.0,
+                ),
+                Container(
+                  color: null,
+                  child: TextFormField(
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: "First name",
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  color: null,
+                  child: TextFormField(
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: "Last name",
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Container(
+                  color: null,
+                  child: TextFormField(
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: "Email",
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Container(
+                  color: null,
+                  child: TextFormField(
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: "Mobile number",
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                const SizedBox(
+                  height: 50,
+                  //this will make the button full width        
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: _onSubmitSignupData,
+                    child: Text("Submit"),
+                  ),
+                ),
+                const SizedBox(
+                  height: 30.0,
+                ),
+                const Text(
+                  "Have an account? Login here",
+                  style: TextStyle(
+                    color: Colors.blue,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+              ],
+            ),
+          )),
+    );
+  }
+}
+
+void _onSubmitSignupData() {}
+
+```
