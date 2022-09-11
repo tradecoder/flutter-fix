@@ -516,3 +516,63 @@ class MyApp extends StatelessWidget {
 void _onSubmitSignupData() {}
 
 ```
+
+## Set full screen background image in Flutter
+
+```dart
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: "Set full screen background image in Flutter",
+      theme: ThemeData(primarySwatch: Colors.pink),
+      home: const Homepage(),
+    );
+  }
+}
+
+class Homepage extends StatefulWidget {
+  const Homepage({super.key});
+  @override
+  State<Homepage> createState() => _HomepageState();
+}
+
+class _HomepageState extends State<Homepage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Full screen background image"),
+      ),
+      body: Container(
+        padding: const EdgeInsets.all(16.0),
+        color: null,
+
+        //this will set background image
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/bg-image-1.jpg"),
+            // use BoxFit to size background image
+            // BoxFit.fill / BoxFit.cover / and other options you can use
+            // based on your requirement
+            fit: BoxFit.fill,
+          ),
+        ),
+        child: const Center(
+            child: Text("To setup full screen background image, "
+                "use DecorationImage and set required size with BoxFit")),
+      ),
+    );
+  }
+}
+
+```
+
