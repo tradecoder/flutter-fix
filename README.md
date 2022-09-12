@@ -576,3 +576,112 @@ class _HomepageState extends State<Homepage> {
 
 ```
 
+## Flutter page navigation create and clear routes
+### Main app
+```dart
+import 'package:flutter/material.dart';
+import 'home_page.dart';
+import 'product_page.dart';
+import 'cart_page.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: "Flutter Navigation",
+      theme: ThemeData(primarySwatch: Colors.orange),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const HomePage(),
+        '/products': (context) => const ProductPage(),
+        '/cart': (context) => const CartPage(),
+      },
+    );
+  }
+}
+
+```
+### Home page
+
+```dart
+import 'package:flutter/material.dart';
+
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("Home")),
+      body: Center(
+        child: Center(
+          child: ElevatedButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/products');
+            },
+            child: const Text("See all products"),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+```
+### Product page
+
+```dart
+import 'package:flutter/material.dart';
+
+class ProductPage extends StatelessWidget {
+  const ProductPage({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("Shop")),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.pushNamed(context, '/cart');
+          },
+          child: const Text("View cart"),
+        ),
+      ),
+    );
+  }
+}
+
+```
+
+### Cart page
+
+```dart
+import 'package:flutter/material.dart';
+
+class CartPage extends StatelessWidget {
+  const CartPage({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("Cart")),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            // this will go back upto the given route name
+            Navigator.of(context).popUntil(ModalRoute.withName('/'));
+
+            // and this will go back to the first route
+            // Navigator.popUntil(context, (route) => route.isFirst);
+          },
+          child: const Text("Clear all routes and back to Homepage"),
+        ),
+      ),
+    );
+  }
+}
+```
