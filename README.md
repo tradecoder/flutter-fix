@@ -2,6 +2,82 @@
 Practical Flutter App development code problems and solutions
 
 
+## Fix double.parse() / int.parse() problems when string contains both numbers and text, and remove leading whitespace from a text
+
+```dart
+import 'package:flutter/material.dart';
+
+class NewTransaction extends StatefulWidget {
+  final Function txnDetails;
+  const NewTransaction({super.key, required this.txnDetails});
+
+  @override
+  State<NewTransaction> createState() => _NewTransactionState();
+}
+
+class _NewTransactionState extends State<NewTransaction> {
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController amountController = TextEditingController();
+
+  void submitData() {
+    // .trim() will remove leading whitespace if any
+
+    final enteredTitle = titleController.text.trim();
+    double? enteredAmount = 0;
+
+    // before applying double.parse(), first check if it really has numbers
+    // then remove everything from the string but keep only numbers and a dot
+    if (amountController.text.contains(RegExp('[1-9]'))) {
+      enteredAmount = double.parse(
+          amountController.text.trim().replaceAll(RegExp('[^0-9.]'), ''));
+    }
+
+    if (!titleController.text.contains(RegExp('[a-zA-Z0-9]')) ||
+        amountController.text.isEmpty ||
+        enteredAmount <= 0 ||
+        amountController.text.contains(RegExp('[a-zA-Z,]'))) {
+      return;
+    }
+
+    widget.txnDetails(
+      enteredTitle,
+      enteredAmount,
+    );
+    Navigator.of(context).pop();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: null,
+      child: Card(
+        elevation: 5,
+        child: Container(
+          color: null,
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>[
+              TextField(
+                decoration: const InputDecoration(labelText: 'Title'),
+                controller: titleController,
+              ),
+              TextField(
+                decoration: const InputDecoration(labelText: 'Amount'),
+                controller: amountController,
+                keyboardType: TextInputType.number,
+              ),
+              TextButton(
+                  onPressed: submitData, child: const Text('Add Transaction'))
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+```
+
 
 ## Add and open external link / hyperlink in flutter
 ```dart
