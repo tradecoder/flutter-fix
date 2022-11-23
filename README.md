@@ -1,6 +1,20 @@
 # Flutter Fix
 Practical Flutter App development code problems and solutions
 
+## Allow device only portrait mode- flutter
+```dart
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+  runApp(const MyApp());
+}
+
+
+```
+
 
 ## Fix double.parse() / int.parse() problems when string contains both numbers and text, and remove leading whitespace from a text
 
