@@ -3,7 +3,7 @@ Practical Flutter App development code problems and solutions
 
 
 ## Options of registering flutter page routes/ navigation, fall back routes for unregistered or unknown routes
-Full code in ![flutter-meals-app](https://github.com/tradecoder/flutter-meals-app/commit/888580c12e7334090f03ebf33c5e88417b352f02#diff-e61eb31d013d12616f5532636a88cfa63631dda8f7829e5424e68542214d1608)
+Full code in [flutter-meals-app](https://github.com/tradecoder/flutter-meals-app/commit/888580c12e7334090f03ebf33c5e88417b352f02#diff-e61eb31d013d12616f5532636a88cfa63631dda8f7829e5424e68542214d1608)
 ```dart
 
 import 'package:flutter/material.dart';
