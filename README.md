@@ -1,7 +1,7 @@
 # Flutter Fix
 Practical Flutter App development code problems and solutions
 
-## Flutter Tab Screen
+## Flutter Tab Screen ViewTabBar
 Full code in [flutter-meals-app](https://github.com/tradecoder/flutter-meals-app)
 
 ```dart
