@@ -1,7 +1,7 @@
 # Flutter Fix
 Practical Flutter App development code problems and solutions
 
-## Flutter Bottom Navigation Bar with Tabs
+## Flutter Bottom Navigation Bar with active Tab color
 Full code in [flutter-meals-app](https://github.com/tradecoder/flutter-meals-app)
 
 ```dart
@@ -39,15 +39,26 @@ class _TabScreenState extends State<TabScreen> {
       body: _pages[_selectedPageIndex],
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectPage,
+        unselectedItemColor: Colors.grey,
+        selectedItemColor: Theme.of(context).primaryColor,
+        currentIndex: _selectedPageIndex,
         items: const [
           BottomNavigationBarItem(
-              icon: Icon(Icons.category), label: 'Category'),
-          BottomNavigationBarItem(icon: Icon(Icons.star), label: 'Favorite')
+            icon: Icon(
+              Icons.category,
+            ),
+            label: 'Category',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.star),
+            label: 'Favorite',
+          ),
         ],
       ),
     );
   }
 }
+
 
 
 ```
