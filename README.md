@@ -1,6 +1,56 @@
 # Flutter Fix
 Practical Flutter App development code problems and solutions
 
+## Flutter Tab Screen
+Full code in [flutter-meals-app](https://github.com/tradecoder/flutter-meals-app)
+
+```dart
+import 'package:flutter/material.dart';
+import '../screens/categories_screen.dart';
+import '../screens/favorite_screen.dart';
+
+class TabScreen extends StatefulWidget {
+  const TabScreen({super.key});
+
+  @override
+  State<TabScreen> createState() => _TabScreenState();
+}
+
+class _TabScreenState extends State<TabScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      length: 2,
+      initialIndex: 0,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Meals'),
+          bottom: const TabBar(
+            tabs: <Widget>[
+              Tab(
+                icon: Icon(Icons.category),
+                text: 'Categories',
+              ),
+              Tab(
+                icon: Icon(Icons.star),
+                text: 'Favorite',
+              ),
+            ],
+          ),
+        ),
+        body: const TabBarView(
+          children: <Widget>[
+            CategoriesScreen(),
+            FavoriteScreen(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+```
 
 ## Options of registering flutter page routes/ navigation, fall back routes for unregistered or unknown routes
 Full code in [flutter-meals-app](https://github.com/tradecoder/flutter-meals-app/commit/888580c12e7334090f03ebf33c5e88417b352f02#diff-e61eb31d013d12616f5532636a88cfa63631dda8f7829e5424e68542214d1608)
