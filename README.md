@@ -1,6 +1,57 @@
 # Flutter Fix
 Practical Flutter App development code problems and solutions
 
+## Flutter Bottom Navigation Bar with Tabs
+
+```dart
+Full code in [flutter-meals-app](https://github.com/tradecoder/flutter-meals-app)
+
+import 'package:flutter/material.dart';
+import '../screens/categories_screen.dart';
+import '../screens/favorite_screen.dart';
+
+class TabScreen extends StatefulWidget {
+  const TabScreen({super.key});
+
+  @override
+  State<TabScreen> createState() => _TabScreenState();
+}
+
+class _TabScreenState extends State<TabScreen> {
+  final List<Widget> _pages = const [
+    CategoriesScreen(),
+    FavoriteScreen(),
+  ];
+  int _selectedPageIndex = 0;
+  void _selectPage(int index) {
+    setState(() {
+      _selectedPageIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Meals'),
+      ),
+      body: _pages[_selectedPageIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: _selectPage,
+        items: const [
+          BottomNavigationBarItem(
+              icon: Icon(Icons.category), label: 'Category'),
+          BottomNavigationBarItem(icon: Icon(Icons.star), label: 'Favorite')
+        ],
+      ),
+    );
+  }
+}
+
+
+```
+
+
 ## Flutter Tab Screen ViewTabBar
 Full code in [flutter-meals-app](https://github.com/tradecoder/flutter-meals-app)
 
