@@ -1,6 +1,42 @@
 # Flutter Fix
 Practical Flutter App development code problems and solutions
 
+## Flutter Drawer()
+Full code in [flutter-meals-app](https://github.com/tradecoder/flutter-meals-app) in TabScreen
+```dart
+Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(_pages[_selectedPageIndex]['title']),
+      ),
+      drawer: const Drawer(
+        child: Text('Drawer'),
+      ),
+      body: _pages[_selectedPageIndex]['page'],
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: _selectPage,
+        unselectedItemColor: Colors.white,
+        selectedItemColor: Colors.yellow,
+        currentIndex: _selectedPageIndex,
+        type: BottomNavigationBarType.shifting,
+        items: [
+          BottomNavigationBarItem(
+            backgroundColor: Theme.of(context).primaryColor,
+            icon: const Icon(Icons.category),
+            label: 'Category',
+          ),
+          BottomNavigationBarItem(
+            backgroundColor: Theme.of(context).primaryColor,
+            icon: const Icon(Icons.star),
+            label: 'Favorite',
+          ),
+        ],
+      ),
+    );
+  }
+
+```
+
 ## Flutter dynamic BottomNavigationBar 
 Full code in [flutter-meals-app](https://github.com/tradecoder/flutter-meals-app)
 
