@@ -2,9 +2,10 @@
 Practical Flutter App development code problems and solutions
 
 ## Flutter Bottom Navigation Bar with Tabs
+Full code in [flutter-meals-app](https://github.com/tradecoder/flutter-meals-app)
 
 ```dart
-Full code in [flutter-meals-app](https://github.com/tradecoder/flutter-meals-app)
+
 
 import 'package:flutter/material.dart';
 import '../screens/categories_screen.dart';
