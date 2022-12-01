@@ -1,6 +1,30 @@
 # Flutter Fix
 Practical Flutter App development code problems and solutions
 
+## Use of flutter didChangeDependencies
+* widget. call does not work in state class, so to use in initState is ok, but
+* ModalRoute does not work in initState(), so to use all in didChangeDependencies
+
+```dart
+void didChangeDependencies() {
+    if (!_loadedInitData) {
+      final routeArgs =
+          ModalRoute.of(context)?.settings.arguments as Map<String, String>;
+      categoryTitle = routeArgs['title']!;
+      final categoryId = routeArgs['id'];
+      displayedMeals = widget.availableMeals.where((meal) {
+        return meal.categories.contains(categoryId);
+      }).toList();
+
+      _loadedInitData = true;
+    }
+
+    super.didChangeDependencies();
+  }
+
+
+```
+
 ## Use of flutter GridView
 
 ```dart
