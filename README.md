@@ -1,6 +1,40 @@
 # Flutter Fix
 Practical Flutter App development code problems and solutions
 
+## Use of flutter InkWell
+
+```dart
+Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () => selectCategory(context),
+      splashColor: Theme.of(context).primaryColor,
+      borderRadius: BorderRadius.circular(20),
+      child: Card(
+        elevation: 5,
+        child: Container(
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
+            gradient: LinearGradient(
+              colors: [color.withOpacity(0.7), color],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomLeft,
+            ),
+          ),
+          child: Center(
+            child: Text(
+              title,
+              style:
+                  const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+```
+
 ## Use of flutter didChangeDependencies
 * widget. call does not work in state class, so to use in initState is ok, but
 * ModalRoute does not work in initState(), so to use all in didChangeDependencies
