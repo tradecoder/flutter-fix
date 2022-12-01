@@ -1,6 +1,32 @@
 # Flutter Fix
 Practical Flutter App development code problems and solutions
 
+## Use of LinearGradient in flutter
+
+```dart
+Card(
+        elevation: 5,
+        child: Container(
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
+            gradient: LinearGradient(
+              colors: [color.withOpacity(0.7), color],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomLeft,
+            ),
+          ),
+          child: Center(
+            child: Text(
+              title,
+              style:
+                  const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+            ),
+          ),
+        ),
+      )
+```
+
 ## Use of flutter InkWell
 
 ```dart
