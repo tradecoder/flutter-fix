@@ -1,6 +1,29 @@
 # Flutter Fix
 Practical Flutter App development code problems and solutions
 
+## Use of flutter GridView
+
+```dart
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: GridView(
+        padding: const EdgeInsets.all(16),
+        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: 180,
+          childAspectRatio: 1,
+          crossAxisSpacing: 12,
+          mainAxisSpacing: 12,
+          mainAxisExtent: 75,
+        ),
+        children: listOfCategories
+            .map((data) => CategoryItem(data.id, data.title, data.color))
+            .toList(),
+      ),
+    );
+  }
+
+```
+
 ## Use of flutter SwitchListTile
 Full code in [flutter-meals-app](https://github.com/tradecoder/flutter-meals-app) in filter_screen.dart
 
