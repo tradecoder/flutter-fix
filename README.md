@@ -1,6 +1,26 @@
 # Flutter Fix
 Practical Flutter App development code problems and solutions
 
+## Handle invalid network image loading in flutter (404)
+
+```dart
+Image.network(
+            product.imageUrl,
+            fit: BoxFit.cover,
+
+            // if image url does not work, load a sample image from app assets
+            errorBuilder:
+                (BuildContext context, Object error, StackTrace? stackTrace) {
+              return Image.asset(
+                'assets/images/image_not_found.jpg',
+                fit: BoxFit.cover,
+              );
+            },
+          ),
+
+```
+
+
 ## Rebuild only required or update data consumed widget with Provider
 ```dart
 import 'package:flutter/material.dart';
