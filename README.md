@@ -24,24 +24,33 @@ class Product with ChangeNotifier {
     this.isFavorite = false,
   });
 
+  void _setFavoriteValue(bool newValue) {
+    isFavorite = newValue;
+    notifyListeners();
+  }
+
   Future<void> toggleFavoriteStatus() async {
     final oldStatus = isFavorite;
     isFavorite = !isFavorite;
     notifyListeners();
-    final url =
-        'https://your_own_url_here.firebaseio.com/products/$id.json';
     try {
-      await http.patch(Uri.parse(url),
+      final url =
+          'https://your_own_url_here.firebaseio.com/products/$id.json';
+
+      final response = await http.patch(Uri.parse(url),
           body: json.encode({
-          // only isFavorite will be updated 
             'isFavorite': isFavorite,
           }));
+
+      if (response.statusCode != 200) {
+        _setFavoriteValue(oldStatus);
+      }
     } catch (error) {
-      isFavorite = oldStatus;
-      notifyListeners();
+      _setFavoriteValue(oldStatus);
     }
   }
 }
+
 
 ```
 
