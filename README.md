@@ -1,6 +1,16 @@
 # Flutter Fix
 Practical Flutter App development code problems and solutions
 
+## Firebase Database Rules only authenticated users can read- write
+
+```javascript{
+  "rules": {
+    ".read": "auth !=null",  
+    ".write": "auth !=null",  
+  }
+}
+```
+
 ## Update only required field in Firebase realtimedatabase with flutter
 ```dart
 import 'dart:convert';
