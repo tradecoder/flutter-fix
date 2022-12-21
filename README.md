@@ -1,6 +1,11 @@
 # Flutter Fix
 Practical Flutter App development code problems and solutions
 
+## Firebase newuser signup api endpoint
+```dart
+final url = Uri.parse('https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=here_is_your_project_api_key');
+```
+
 ## Firebase Database Rules only authenticated users can read- write
 
 ```javascript{
