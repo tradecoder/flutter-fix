@@ -1,9 +1,11 @@
 # Flutter Fix
 Practical Flutter App development code problems and solutions
 
-## Firebase newuser signup api endpoint
+## Signup with email and password Firebase api endpoint
 ```dart
-final url = Uri.parse('https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=here_is_your_project_api_key');
+final url = Uri.parse('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=here_is_your_project_api_key');
+
+// final url = Uri.parse('https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=here_is_your_project_api_key');
 ```
 
 ## Firebase Database Rules only authenticated users can read- write
