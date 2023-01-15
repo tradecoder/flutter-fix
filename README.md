@@ -1,6 +1,71 @@
 # Flutter Fix
 Practical Flutter App development code problems and solutions
 
+## Use of Camera in flutter 
+```dart
+import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+
+class ImageInput extends StatefulWidget {
+  const ImageInput({super.key});
+
+  @override
+  State<ImageInput> createState() => _ImageInputState();
+}
+
+class _ImageInputState extends State<ImageInput> {
+  File? _storedImage;
+  Future<void> _takePicture() async {
+    final imagePicker = ImagePicker();
+    final imageFile = await imagePicker.pickImage(
+      source: ImageSource.camera,
+      maxWidth: 600,
+    );
+    setState(() {
+      _storedImage = File(imageFile!.path);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Container(
+          width: 150,
+          height: 100,
+          decoration: BoxDecoration(
+            border: Border.all(width: 1, color: Colors.grey),
+          ),
+          alignment: Alignment.center,
+          child: _storedImage != null
+              ? Image.file(
+                  _storedImage!,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                )
+              : const Text(
+                  'No image taken',
+                  textAlign: TextAlign.center,
+                ),
+        ),
+        const SizedBox(
+          height: 12.0,
+        ),
+        Expanded(
+          child: TextButton.icon(
+            onPressed: _takePicture,
+            icon: const Icon(Icons.camera_alt),
+            label: const Text('Take Photo'),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+```
+
 ## Signup with email and password Firebase api endpoint
 ```dart
 final url = Uri.parse('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=here_is_your_project_api_key');
