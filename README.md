@@ -22,8 +22,16 @@ class _ImageInputState extends State<ImageInput> {
       source: ImageSource.camera,
       maxWidth: 600,
     );
+
+    // this will prevent app crash when you'll cancel the camera
+    // without taking image
+    if (imageFile == null) {
+      return;
+    }
+
+    // update _storedImage immediately after taking a photo
     setState(() {
-      _storedImage = File(imageFile!.path);
+      _storedImage = File(imageFile.path);
     });
   }
 
