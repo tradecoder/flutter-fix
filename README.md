@@ -1,6 +1,25 @@
 # Flutter Fix
 Practical Flutter App development code problems and solutions
 
+## Getting data from firestore
+
+```dart
+ floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () async {
+          await Firebase.initializeApp();
+          FirebaseFirestore.instance
+              .collection('/chat/5eUgK6qd6YABtD2Pt723/messages/')
+              .snapshots()
+              .listen((QuerySnapshot querySnapshot) {
+            print('I am here');
+            print(querySnapshot.docs.map((e) => e['text']));
+            // 'text' is a document field stored in database
+          });
+        },
+      ),
+```
+
 ## Use of Camera in flutter 
 ```dart
 import 'dart:io';
