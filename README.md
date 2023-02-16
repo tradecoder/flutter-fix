@@ -1,6 +1,26 @@
 # Flutter Fix
 Practical Flutter App development code problems and solutions
 
+## Automatic flutter app icon launcher 
+
+* Add flutter_launcher_icons as dev_dependencies
+* Put your icons in a folder and configure it as shown below with the icon path
+```yaml
+
+dev_dependencies:
+
+  flutter_launcher_icons: ^0.11.0
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "dev_assets/flatchat.png"
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "dev_assets/flatchat_adaptive.png"
+
+```
+* run this command `flutter pub run flutter_launcher_icons`
+
 
 ## Flutter form validation (login / signup screen)
 
